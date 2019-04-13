@@ -43,7 +43,7 @@ export class BarChartComponent implements OnInit {
 
     // displaying data
     bar.append('text')
-      .attr('x', function (d) { return (d * scaleFactor) +10; })
+      .attr('x', function (d) { return (d * scaleFactor); })
       .attr('y', barHeight / 2)
       .attr('dy', '.35em')
       .text(function (d) { return d; });
