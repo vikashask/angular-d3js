@@ -9,6 +9,7 @@ import { SvgRectangleComponent } from './components/svg/svg-rectangle/svg-rectan
 import { SvgCircleComponent } from './components/svg/svg-circle/svg-circle.component';
 import { SvgEllicpseComponent } from './components/svg/svg-ellicpse/svg-ellicpse.component';
 import { BarChartComponent } from './components/chart/bar-chart/bar-chart.component';
+import { CircleChartComponent } from './components/chart/circle-chart/circle-chart.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { BarChartComponent } from './components/chart/bar-chart/bar-chart.compon
     SvgRectangleComponent,
     SvgCircleComponent,
     SvgEllicpseComponent,
-    BarChartComponent
+    BarChartComponent,
+    CircleChartComponent
   ],
   imports: [
     BrowserModule
