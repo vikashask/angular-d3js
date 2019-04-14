@@ -11,6 +11,7 @@ import { SvgEllicpseComponent } from './components/svg/svg-ellicpse/svg-ellicpse
 import { BarChartComponent } from './components/chart/bar-chart/bar-chart.component';
 import { CircleChartComponent } from './components/chart/circle-chart/circle-chart.component';
 import { PieChartComponent } from './components/chart/pie-chart/pie-chart.component';
+import { PieChartNewComponent } from './components/chart/pie-chart-new/pie-chart-new.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { PieChartComponent } from './components/chart/pie-chart/pie-chart.compon
     SvgEllicpseComponent,
     BarChartComponent,
     CircleChartComponent,
-    PieChartComponent
+    PieChartComponent,
+    PieChartNewComponent
   ],
   imports: [
     BrowserModule
