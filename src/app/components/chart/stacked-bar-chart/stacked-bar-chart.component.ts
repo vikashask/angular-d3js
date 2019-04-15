@@ -7,7 +7,7 @@ import * as d3Shape from 'd3-shape';
 import * as d3Axis from 'd3-axis';
 import * as d3Array from 'd3-array';
 
-import { SAMPLE_DATA } from '../../../shared/data04';
+// import { SAMPLE_DATA } from '../../../shared/data04';
 
 
 export interface Margin {
@@ -45,7 +45,7 @@ export class StackedBarChartComponent implements OnInit {
   ngOnInit() {
     this.initMargins();
     this.initSvg();
-    this.drawChart(SAMPLE_DATA);
+    // this.drawChart(SAMPLE_DATA);
 
   }
 

@@ -14,6 +14,7 @@ import { PieChartComponent } from './components/chart/pie-chart/pie-chart.compon
 import { PieChartNewComponent } from './components/chart/pie-chart-new/pie-chart-new.component';
 import { StackedBarChartComponent } from './components/chart/stacked-bar-chart/stacked-bar-chart.component';
 import { LineChartComponent } from './components/chart/line-chart/line-chart.component';
+import { StackBarComponent } from './components/chart/stack-bar/stack-bar.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { LineChartComponent } from './components/chart/line-chart/line-chart.com
     PieChartComponent,
     PieChartNewComponent,
     StackedBarChartComponent,
-    LineChartComponent
+    LineChartComponent,
+    StackBarComponent
   ],
   imports: [
     BrowserModule

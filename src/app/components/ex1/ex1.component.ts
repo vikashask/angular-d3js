@@ -14,9 +14,9 @@ export class Ex1Component implements OnInit {
     d3.select('#list').selectAll('li')
       .data([10, 20, 30, 25, 15])
       .text(function (d, i) {
-        console.log('index ', i); // the index element
-        console.log('data ', d); // the data element
-        console.log(this); // the current DOM object
+        // console.log('index ', i); // the index element
+        // console.log('data ', d); // the data element
+        // console.log(this); // the current DOM object
         return d;
       });
   }
