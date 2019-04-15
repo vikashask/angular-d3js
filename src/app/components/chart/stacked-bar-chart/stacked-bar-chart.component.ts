@@ -7,7 +7,7 @@ import * as d3Shape from 'd3-shape';
 import * as d3Axis from 'd3-axis';
 import * as d3Array from 'd3-array';
 
-// import { SAMPLE_DATA } from '../../../shared/data04';
+import { SAMPLE_DATA } from '../../../shared/data04';
 
 
 export interface Margin {
@@ -45,7 +45,7 @@ export class StackedBarChartComponent implements OnInit {
   ngOnInit() {
     this.initMargins();
     this.initSvg();
-    // this.drawChart(SAMPLE_DATA);
+    this.drawChart(SAMPLE_DATA);
 
   }
 
@@ -53,7 +53,7 @@ export class StackedBarChartComponent implements OnInit {
     this.margin = { top: 20, right: 20, bottom: 30, left: 40 };
   }
   private initSvg() {
-    this.svg = d3.select('svg');
+    this.svg = d3.select('#stacked-bar-chart');
 
     this.width = +this.svg.attr('width') - this.margin.left - this.margin.right;
     this.height = +this.svg.attr('height') - this.margin.top - this.margin.bottom;
@@ -94,7 +94,7 @@ export class StackedBarChartComponent implements OnInit {
       .attr('x', d => this.x(d.data.State))
       .attr('y', d => this.y(d[1]))
       .attr('height', d => this.y(d[0]) - this.y(d[1]))
-      .attr('width', this.x.bandwidth());
+      .attr('width', this.x.bandwidth()-10);
 
     this.g.append('g')
       .attr('class', 'axis')
@@ -113,26 +113,26 @@ export class StackedBarChartComponent implements OnInit {
       .attr('text-anchor', 'start')
       .text('Population');
 
-    let legend = this.g.append('g')
-      .attr('font-family', 'sans-serif')
-      .attr('font-size', 10)
-      .attr('text-anchor', 'end')
-      .selectAll('g')
-      .data(keys.slice().reverse())
-      .enter().append('g')
-      .attr('transform', (d, i) => 'translate(0,' + i * 20 + ')');
+    // let legend = this.g.append('g')
+    //   .attr('font-family', 'sans-serif')
+    //   .attr('font-size', 10)
+    //   .attr('text-anchor', 'end')
+    //   .selectAll('g')
+    //   .data(keys.slice().reverse())
+    //   .enter().append('g')
+    //   .attr('transform', (d, i) => 'translate(0,' + i * 20 + ')');
 
-    legend.append('rect')
-      .attr('x', this.width - 19)
-      .attr('width', 19)
-      .attr('height', 19)
-      .attr('fill', this.z);
+    // legend.append('rect')
+    //   .attr('x', this.width - 19)
+    //   .attr('width', 19)
+    //   .attr('height', 19)
+    //   .attr('fill', this.z);
 
-    legend.append('text')
-      .attr('x', this.width - 24)
-      .attr('y', 9.5)
-      .attr('dy', '0.32em')
-      .text(d => d);
+    // legend.append('text')
+    //   .attr('x', this.width - 24)
+    //   .attr('y', 9.5)
+    //   .attr('dy', '0.32em')
+    //   .text(d => d);
   }
 
 }
