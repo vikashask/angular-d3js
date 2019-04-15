@@ -1,9 +1,9 @@
 .bar {
-    fill: steelblue;
+    fill: rgb(42, 43, 44);
 }
 
 .bar:hover {
-    fill: brown;
+    fill: rgb(123, 49, 219);
 }
 
 .axis-title {
