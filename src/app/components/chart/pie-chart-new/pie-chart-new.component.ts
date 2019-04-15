@@ -36,12 +36,11 @@ export class PieChartNewComponent implements OnInit {
     ngOnInit() {
         this.initSvg();
         this.drawPie();
-
     }
 
     private initSvg() {
         this.color = d3Scale.scaleOrdinal()
-            .range(['#98abc5', '#8a89a6', '#7b6888', '#6b486b', '#a05d56', '#d0743c', '#ff8c00']);
+            .range(['blue', '#8a89a6', '#7b6888', '#6b486b', 'red', '#d0743c', '#ff8c00']);
         this.arc = d3Shape.arc()
             .outerRadius(this.radius - 10)
             .innerRadius(0);
@@ -51,7 +50,7 @@ export class PieChartNewComponent implements OnInit {
         this.pie = d3Shape.pie()
             .sort(null)
             .value((d: any) => d.population);
-        this.svg = d3.select('svg')
+        this.svg = d3.select('#chartarea22')
             .append('g')
             .attr('transform', 'translate(' + this.width / 2 + ',' + this.height / 2 + ')');
     }

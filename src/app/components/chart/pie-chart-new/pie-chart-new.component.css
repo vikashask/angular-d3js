@@ -1,8 +1,13 @@
 .arc text {
-    font: 10px sans-serif;
-    text-anchor: middle;
+    /* font: 10px sans-serif;
+    text-anchor: middle; */
 }
 
 .arc path {
     stroke: #fff;
+}
+
+.label{
+    color: red;
+    font-size: 45px;
 }
