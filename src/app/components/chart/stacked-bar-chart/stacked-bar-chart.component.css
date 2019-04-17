@@ -1,4 +1,6 @@
 .axis .domain {
     display: none;
   }
-  
+  .limit{
+    margin-left: 20px;
+  }
