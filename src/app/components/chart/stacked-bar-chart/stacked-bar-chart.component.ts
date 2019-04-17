@@ -65,7 +65,7 @@ export class StackedBarChartComponent implements OnInit {
       .paddingInner(0.05)
       .align(0.1);
     this.y = d3Scale.scaleLinear()
-      .rangeRound([this.height, 0]);
+      .rangeRound([this.height - 100, 0]);
     this.z = d3Scale.scaleOrdinal()
       .range(['red', 'blue', 'green', 'black', '#a05d56', '#d0743c', '#ff8c00']);
   }
@@ -112,28 +112,27 @@ export class StackedBarChartComponent implements OnInit {
       .enter()
       .append('g')
       .append('text')
-      .text((d,i)=>{
+      .text((d, i) => {
         // console.log('data',d.data);
         return 'abc';
       })
-      .attr('x', d =>  {
-        return this.x(d.data.State)+this.x.bandwidth()/2-10
-      } 
+      .attr('x', d => {
+        return this.x(d.data.State) + this.x.bandwidth() / 2 - 10
+      }
       )
-      .attr('y', d => 
-        {
-          let height = this.y(d[0]) - this.y(d[1]);
-          let y  = this.y(d[1]);
-          let final = y + height/2;
-          return final; 
-        }
+      .attr('y', d => {
+        let height = this.y(d[0]) - this.y(d[1]);
+        let y = this.y(d[1]);
+        let final = y + height / 2;
+        return final;
+      }
       )
       .attr('fill', 'white');
 
     // drar x axis
     this.g.append('g')
       .attr('class', 'axis')
-      .attr('transform', 'translate(0,' + this.height + ')')
+      .attr('transform', 'translate(0,' + (this.height - 100) + ')')
       .call(d3Axis.axisBottom(this.x));
 
     this.g.append('g')
@@ -156,76 +155,46 @@ export class StackedBarChartComponent implements OnInit {
       .text('(Millions)');
 
 
-// this.x(data[0].State)
-      this.g.append('g')
+    // creating a line below chart
+    this.g.append('g')
       .append('line')
-        .attr("x1", (d) => {
-          console.log(data[0].State);
-          console.log('x1',this.x(data[0].State));
-          console.log('x2',this.x(data[data.length-1].State));
-          return this.x(data[0].State);
-        })
-        .attr("y1", this.height+30)
-        .attr("x2", d => {
-          return this.x(data[data.length-1].State);
-        })
-        .attr("y2", this.height+30)
-        .attr('stroke','gray')
-        .attr('stroke-width',5)
-        ;
+      .attr("x1", (d) => {
+        return this.x(data[0].State);
+      })
+      .attr("y1", this.height - 60)
+      .attr("x2", d => {
+        return this.x(data[data.length - 1].State) + 200;
+      })
+      .attr("y2", this.height - 60)
+      .attr('stroke', 'gray')
+      .attr('stroke-width', 2);
 
-        // <line x1="5" y1="5" x2="40" y2="40" stroke="gray" stroke-width="5"  />
-      // ---------------------------
-      var svgContainer = d3.select("#line")
-      .append("svg")
-      .attr("width", 700)
-      .attr("height", 14);
+    // creating text below line
+    // <text x="50" y="50" font-family="sans-serif" font-size="12px" fill="red">Circle<text>
+    this.g.append('g')
+      .selectAll('text')
+      .data(data)
+      .enter()
+      .append('text')
+      .attr('x', d => {
+        return this.x(d.State) + 50;
+      }
+      )
+      .attr('y', 410)
+      .text(d => d.State)
 
-      var drawLine = svgContainer.append("line")
-        .attr("x1", 70)
-        .attr("y1", 0)
-        .attr("x2", 700)
-        .attr("y2", 0)
-        .attr("stroke-width", 4)
-        .attr("stroke", "#cacac4");
+    // appending text
+    this.g.append('text')
+      .data(data)
+      .attr('x', d => {
+        console.log(d);
+        return this.x(d.State)
+      }
+      )
+      .attr('y', 410)
+      .text("limits")
 
-        d3.select("#limit")
-        .append("spam")
-        .text("Coverage limits")
-        .attr('class','limit')
-        ;
-
-        d3.select("#limit")
-        .append("spam")
-        .text("$100,000,000")
-        .attr('class','limit')
-        ;
-
-        d3.select("#limit")
-        .append("spam")
-        .text("$50,000,000")
-        .attr('class','limit')
-        ;
-
-        d3.select("#premium")
-        .append("spam")
-        .text("Premium")
-        .attr('class','limit')
-        ;
-
-        d3.select("#premium")
-        .append("spam")
-        .text("$100,000,000")
-        .attr('class','limit')
-        ;
-
-        d3.select("#premium")
-        .append("spam")
-        .text("$50,000,000")
-        .attr('class','limit')
-        ;
-
-        // subhakaer
+    // subhakaer
     // used for short note in right side
     // let legend = this.g.append('g')
     //   .attr('font-family', 'sans-serif')
@@ -240,8 +209,8 @@ export class StackedBarChartComponent implements OnInit {
     //   .attr('x', this.width - 19)
     //   .attr('width', 40)
     //   .attr('height', 19)
-      // .attr('transform', (d, i) => 'translate(0,400)')
-      // .attr('fill', this.z);
+    // .attr('transform', (d, i) => 'translate(0,400)')
+    // .attr('fill', this.z);
 
     // legend.append('text')
     //   .attr('x', this.width - 24)
@@ -249,6 +218,9 @@ export class StackedBarChartComponent implements OnInit {
     //   .attr('dy', '0.32em')
     //   .text(d => d);
 
+  }
+  drawLine() {
+    
   }
 
 }
