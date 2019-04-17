@@ -52,6 +52,7 @@ export class StackedBarChartComponent implements OnInit {
   private initMargins() {
     this.margin = { top: 20, right: 20, bottom: 30, left: 40 };
   }
+
   private initSvg() {
     this.svg = d3.select('#stacked-bar-chart');
 
@@ -66,7 +67,7 @@ export class StackedBarChartComponent implements OnInit {
     this.y = d3Scale.scaleLinear()
       .rangeRound([this.height, 0]);
     this.z = d3Scale.scaleOrdinal()
-      .range(['#98abc5', '#8a89a6', '#7b6888', '#6b486b', '#a05d56', '#d0743c', '#ff8c00']);
+      .range(['red', 'blue', 'green', 'black', '#a05d56', '#d0743c', '#ff8c00']);
   }
 
   private drawChart(data: any[]) {
@@ -90,12 +91,46 @@ export class StackedBarChartComponent implements OnInit {
       .attr('fill', d => this.z(d.key))
       .selectAll('rect')
       .data(d => d)
-      .enter().append('rect')
+      .text('Pop')
+      .enter()
+
+      .append('rect')
       .attr('x', d => this.x(d.data.State))
       .attr('y', d => this.y(d[1]))
       .attr('height', d => this.y(d[0]) - this.y(d[1]))
-      .attr('width', this.x.bandwidth()-10);
+      .attr('width', this.x.bandwidth() - 10);
 
+    this.g.append('g')
+      .selectAll('g')
+      .data(d3Shape.stack().keys(keys)(data))
+      .enter().append('g')
+      .attr('fill', d => this.z(d.key))
+      .selectAll('rect')
+      .data(d => d)
+
+      // writing label in rec
+      .enter()
+      .append('g')
+      .append('text')
+      .text((d,i)=>{
+        // console.log('data',d.data);
+        return 'abc';
+      })
+      .attr('x', d =>  {
+        return this.x(d.data.State)+this.x.bandwidth()/2-10
+      } 
+      )
+      .attr('y', d => 
+        {
+          let height = this.y(d[0]) - this.y(d[1]);
+          let y  = this.y(d[1]);
+          let final = y + height/2;
+          return final; 
+        }
+      )
+      .attr('fill', 'white');
+
+    // drar x axis
     this.g.append('g')
       .attr('class', 'axis')
       .attr('transform', 'translate(0,' + this.height + ')')
@@ -111,8 +146,87 @@ export class StackedBarChartComponent implements OnInit {
       .attr('fill', '#000')
       .attr('font-weight', 'bold')
       .attr('text-anchor', 'start')
-      .text('Population');
 
+    // Y axix text
+    this.g.append('text')
+      .attr('x', -140)
+      .attr('y', -30)
+      .attr('transform', 'rotate(-90)')
+      .attr('text-anchor', 'middle')
+      .text('(Millions)');
+
+
+// this.x(data[0].State)
+      this.g.append('g')
+      .append('line')
+        .attr("x1", (d) => {
+          console.log(data[0].State);
+          console.log('x1',this.x(data[0].State));
+          console.log('x2',this.x(data[data.length-1].State));
+          return this.x(data[0].State);
+        })
+        .attr("y1", this.height+30)
+        .attr("x2", d => {
+          return this.x(data[data.length-1].State);
+        })
+        .attr("y2", this.height+30)
+        .attr('stroke','gray')
+        .attr('stroke-width',5)
+        ;
+
+        // <line x1="5" y1="5" x2="40" y2="40" stroke="gray" stroke-width="5"  />
+      // ---------------------------
+      var svgContainer = d3.select("#line")
+      .append("svg")
+      .attr("width", 700)
+      .attr("height", 14);
+
+      var drawLine = svgContainer.append("line")
+        .attr("x1", 70)
+        .attr("y1", 0)
+        .attr("x2", 700)
+        .attr("y2", 0)
+        .attr("stroke-width", 4)
+        .attr("stroke", "#cacac4");
+
+        d3.select("#limit")
+        .append("spam")
+        .text("Coverage limits")
+        .attr('class','limit')
+        ;
+
+        d3.select("#limit")
+        .append("spam")
+        .text("$100,000,000")
+        .attr('class','limit')
+        ;
+
+        d3.select("#limit")
+        .append("spam")
+        .text("$50,000,000")
+        .attr('class','limit')
+        ;
+
+        d3.select("#premium")
+        .append("spam")
+        .text("Premium")
+        .attr('class','limit')
+        ;
+
+        d3.select("#premium")
+        .append("spam")
+        .text("$100,000,000")
+        .attr('class','limit')
+        ;
+
+        d3.select("#premium")
+        .append("spam")
+        .text("$50,000,000")
+        .attr('class','limit')
+        ;
+
+        // subhakaer
+    // used for short note in right side
     // let legend = this.g.append('g')
     //   .attr('font-family', 'sans-serif')
     //   .attr('font-size', 10)
@@ -124,15 +238,17 @@ export class StackedBarChartComponent implements OnInit {
 
     // legend.append('rect')
     //   .attr('x', this.width - 19)
-    //   .attr('width', 19)
+    //   .attr('width', 40)
     //   .attr('height', 19)
-    //   .attr('fill', this.z);
+      // .attr('transform', (d, i) => 'translate(0,400)')
+      // .attr('fill', this.z);
 
     // legend.append('text')
     //   .attr('x', this.width - 24)
     //   .attr('y', 9.5)
     //   .attr('dy', '0.32em')
     //   .text(d => d);
+
   }
 
 }
